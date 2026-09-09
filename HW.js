@@ -1,4 +1,4 @@
-const { error } = require("node:console");
+
 const { initializeDatabase } = require("./db/db.connect");
 const Movie = require("./models/movie.model");
 const express = require("express");
