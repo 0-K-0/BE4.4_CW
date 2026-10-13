@@ -15,7 +15,7 @@ const allMovieHandler = async (movies) => {
   }
 };
 
-app.post("/Upload_movies/:movies", async (req, res) => {
+app.post("/Upload_movies/movies", async (req, res) => {
   try {
     const movies = req.body.movies;
     if (movies && movies.length > 0) {
