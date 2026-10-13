@@ -1,44 +1,39 @@
-
 const { initializeDatabase } = require("./db/db.connect");
 const Movie = require("./models/movie.model");
 const express = require("express");
+const cors = require("cors");
 const app = express();
+app.use(cors());
 app.use(express.json());
-const MovieUpdateHander = async (MovieID, dataToUpdate) => {
+
+const allMovieHandler = async (movies) => {
   try {
-    const movieToUpdate = await Movie.findByIdAndUpdate(MovieID, dataToUpdate, {
-      returnDocument: "after",
-    });
-    return movieToUpdate;
+    const uploadMovie = await Movie.insertMany(movies);
+    return uploadMovie;
   } catch (error) {
     throw error;
   }
 };
-app.post("/movies/:movieId", async (req, res) => {
+
+app.post("/Upload_movies/:movies", async (req, res) => {
   try {
-    const updatedMovie = await MovieUpdateHander(req.params.movieId, req.body);
-    if (updatedMovie) {
+    const movies = req.body.movies;
+    if (movies && movies.length > 0) {
+      const sendTheMovies = await allMovieHandler(movies);
       res
         .status(200)
-        .json({
-          message: "Movie Updated successfully.",
-          UpdatedMovie: updatedMovie,
-        });
+        .json({ message: "movie uploaded successfully", sendTheMovies });
     } else {
-      res.status(404).json({ error: "Movie not found" });
+      res.status(400).json({ error: "an error oquired" });
     }
   } catch (error) {
-    res.status(500).json({ error: "faild to update movie" });
+    res.status(500).json({ error: "an error oquired" });
+    console.error(error);
   }
 });
 
-const connectionHander = async () => {
-  try {
-    initializeDatabase();
-    console.log("Server is connected the Db");
-    app.listen(3000, () => console.log("Server is Running of port 3000"));
-  } catch (error) {
-    throw error;
-  }
-};
-connectionHander();
+const PORT = 4000;
+initializeDatabase();
+app.listen(process.env.PORT || PORT, () =>
+  console.log(`server is running on ${PORT}`),
+);

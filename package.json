@@ -7,12 +7,21 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node HW.js"
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1",
+    "express": "^5.3.0",
     "gitignore": "^0.7.0",
-    "mongoose": "^9.9.5"
-  }
+    "mongoose": "^9.11.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0-K-0/BE4.4_CW.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0-K-0/BE4.4_CW/issues"
+  },
+  "homepage": "https://github.com/0-K-0/BE4.4_CW#readme"
 }
