@@ -8,7 +8,7 @@ app.use(express.json());
 
 const UploadMovies = async (movies) => {
   try {
-    const uploadMovie = await Movie.insertMany(movies);
+    const uploadMovie = await Movie.create(movies);
     return uploadMovie;
   } catch (error) {
     throw error;
@@ -17,7 +17,7 @@ const UploadMovies = async (movies) => {
 
 app.post("/movies/upload", async (req, res) => {
   try {
-    const movies = req.body.movies;
+    const movies = req.body;
     if (movies && movies.length > 0) {
       const sendTheMovies = await UploadMovies(movies);
       res
