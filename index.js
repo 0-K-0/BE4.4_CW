@@ -24,7 +24,7 @@ app.post("/movies/upload", async (req, res) => {
         .status(200)
         .json({ message: "movie uploaded successfully", sendTheMovies });
     } else {
-      res.status(400).json({ error: "an error oquired" });
+      res.status(400).json({ error: error });
     }
   } catch (error) {
     res.status(500).json({ error: "an error oquired" });
