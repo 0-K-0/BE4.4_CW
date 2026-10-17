@@ -18,16 +18,16 @@ const UploadMovies = async (movies) => {
 app.post("/movies/upload", async (req, res) => {
   try {
     const movies = req.body;
-    if (movies && movies.length > 0) {
+    if (movies) {
       const sendTheMovies = await UploadMovies(movies);
       res
         .status(200)
         .json({ message: "movie uploaded successfully", sendTheMovies });
     } else {
-      res.status(400).json({ error: error });
+      res.status(400).json({ error: "an error oqired" });
     }
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: error.message });
     console.error(error);
   }
 });
